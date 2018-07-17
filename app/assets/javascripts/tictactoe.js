@@ -50,8 +50,8 @@ function checkWinner() {
   function checkForX(element){
     return ( (element === "X"));
   }
-  function checkForY(element){
-    return ( (element === "Y"));
+  function checkForO(element){
+    return ( (element === "O"));
   }
 
   WIN_COMBINATIONS.forEach(function(combo){ //returns array of winning combinations, ex. [0,1,2]
@@ -61,9 +61,9 @@ function checkWinner() {
     if (test_array.every(checkForX)) {
      answer = true;
      winner = "X"
-   } else if (test_array.every(checkForY)) {
+   } else if (test_array.every(checkForO)) {
       answer = true;
-      winner = "Y"
+      winner = "O"
     };
     test_array = [];
   });
