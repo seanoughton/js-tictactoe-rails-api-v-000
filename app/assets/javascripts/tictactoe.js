@@ -17,6 +17,9 @@ function player() {
 };
 
 //Invokes player() and adds the returned string ('X' or 'O') to the clicked square on the game board.
-function updateState() {
+//window.updateState(squares[8]); window.updateState(squares[0]); squares is an array of table data, indexed 0-8
+function updateState(square) {
+  debugger
   var token = player();
+  //add innerHTML of the token to the appropriate td
 }
