@@ -3,7 +3,7 @@ $( document ).ready(function() {
 
 });//end document.ready
 
-var turn = 0;
+var turn = 1;
 
 //Returns the token of the player whose turn it is, 'X' when the turn variable is even and 'O' when it is odd.
 function player() {
