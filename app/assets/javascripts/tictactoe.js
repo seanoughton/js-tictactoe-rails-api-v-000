@@ -21,3 +21,8 @@ function updateState(square) {
   var token = player();
   square.innerHTML = token;
 }
+
+//Accepts a string and adds it to the div#message element in the DOM.
+function setMessage(string) {
+  $( "#message" ).innerHTML(string);
+}
