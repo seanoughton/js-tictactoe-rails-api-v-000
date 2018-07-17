@@ -7,7 +7,6 @@ var turn = 1;
 
 //Returns the token of the player whose turn it is, 'X' when the turn variable is even and 'O' when it is odd.
 function player() {
-  //(n % 2) === 0  //to get even numbers
   var player = ""
   if ((turn % 2) === 0) {
     player = "X"}
@@ -16,3 +15,8 @@ function player() {
     }
   return player;
 };
+
+//Invokes player() and adds the returned string ('X' or 'O') to the clicked square on the game board.
+function updateState() {
+  var token = player();
+}
