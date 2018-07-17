@@ -20,6 +20,6 @@ function player() {
 //window.updateState(squares[8]); window.updateState(squares[0]); squares is an array of table data, indexed 0-8
 function updateState(square) {
   var token = player();
-  this.innerHTML = token;
+  square.innerHTML = token;
   //add innerHTML of the token to the appropriate td
 }
