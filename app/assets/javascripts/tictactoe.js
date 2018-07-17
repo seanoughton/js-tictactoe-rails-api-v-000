@@ -9,7 +9,7 @@ var turn = 1;
 function player() {
   //(n % 2) === 0  //to get even numbers
   var player = ""
-  if (turn % 2) === 0 {
+  if ((turn % 2) === 0) {
     player = "X"}
   else {
       player = "O"
