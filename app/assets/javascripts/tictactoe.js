@@ -14,7 +14,7 @@ function attachListeners(){
 
 };
 
-var turn = 1;
+var turn = 0;
 var board_full = false;
 
 
