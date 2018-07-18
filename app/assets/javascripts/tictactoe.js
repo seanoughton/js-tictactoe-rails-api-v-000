@@ -50,7 +50,7 @@ function checkforEmpty(element){
   return ( (element === ""))
 }
 
-function fullBoard(element){
+function fullBoard(board_array){
   if (board_array.some(checkforEmpty)) {
    board_full = false;
  } else{
@@ -67,14 +67,10 @@ function getBoard(){
 //Returns true if the current board contains any winning combinations (three X or O tokens in a row, vertically, horizontally, or diagonally). Otherwise, returns false.
 //If there is a winning combination on the board, checkWinner() should invoke setMessage(), passing in the appropriate string based on who won: 'Player X Won!' or 'Player O Won!'
 function checkWinner() {
-  //var board = $("td").get();
   var answer = false;
   var winner = "";
-  //const board_array = board.map(square => square.innerHTML);
   var test_array = [];
   var board_array = getBoard();
-
-
 
   WIN_COMBINATIONS.forEach(function(combo){ //returns array of winning combinations, ex. [0,1,2]
     combo.forEach(function(index){
@@ -86,11 +82,12 @@ function checkWinner() {
    } else if (test_array.every(checkForO)) {
       answer = true;
       winner = "O"
+    } else {
+      answer = false;
+      winner = "No Winner"
     };
     test_array = [];
   });
-
-
 
   var message = `Player ${winner} Won!`
   setMessage(message);
