@@ -80,4 +80,6 @@ function checkWinner() {
 //Invokes checkWinner() to determine whether the move results in a winning play.
 function doTurn() {
   turn += 1;
+  updateState(element);
+  checkWinner();
 };
