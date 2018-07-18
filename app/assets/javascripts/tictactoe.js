@@ -14,8 +14,9 @@ function attachListeners(){
 
 };
 
-var turn = 2;
+var turn = 0;
 var board_full = false;
+
 
 
 const WIN_COMBINATIONS = [
@@ -30,13 +31,16 @@ const WIN_COMBINATIONS = [
 ];
 
 //Returns the token of the player whose turn it is, 'X' when the turn variable is even and 'O' when it is odd.
+
+function isEven(num) {
+    return num % 2 === 0;
+}
+
 function player() {
-  var player = "";
-  if ((turn % 2) === 0) {
-    player = "X"}
-  else {
-      player = "O"
-    }
+  var player = "O";
+  if ( isEven(turn) ) {
+    player = "X"
+  };
   return player;
 };
 
@@ -60,13 +64,13 @@ function checkForO(element){
 }
 
 function checkforEmpty(element){
-  return ( (element === ""))
+  return (element === ' ')//trim()
 }
 
 function fullBoard(board_array){
   if (board_array.some(checkforEmpty)) {
    board_full = false;
- } else{
+ } else {
    board_full = true;
  }
  return board_full;
@@ -107,7 +111,7 @@ function checkWinner() {
   if (answer === true && fullBoard(board_array) === false){
     message = `Player ${winner} Won!`
     //reset the board
-  }else{
+  }else if (fullBoard(board_array) === true) {
     message = "Tie game.";
   };
 
@@ -117,15 +121,16 @@ function checkWinner() {
 
 function resetBoard(){
   $('td').html('')
+  turn = 0;
 }
 
 
 function doTurn(square) {
-  turn += 1;
   updateState(square);
+  turn += 1;
   var board_array = getBoard();
   if (checkWinner() || fullBoard(board_array)) {
-    turn = 0;
+    //turn = 0;
     resetBoard();
   };
 };
