@@ -4,6 +4,7 @@ $( document ).ready(function() {
 });//end document.ready
 
 var turn = 1;
+var board_full = false;
 
 const WIN_COMBINATIONS = [
   [0,1,2],
@@ -38,21 +39,42 @@ function setMessage(string) {
   $( "#message" ).html(string);
 }
 
+function checkForX(element){
+  return ( (element === "X"));
+}
+function checkForO(element){
+  return ( (element === "O"));
+}
+
+function checkforEmpty(element){
+  return ( (element === ""))
+}
+
+function fullBoard(element){
+  if (board_array.some(checkforEmpty)) {
+   board_full = false;
+ } else{
+   board_full = true;
+ }
+}
+
+function getBoard(){
+  var board = $("td").get();
+  //const board_array = board.map(square => square.innerHTML);
+  return board.map(square => square.innerHTML);
+}
+
 //Returns true if the current board contains any winning combinations (three X or O tokens in a row, vertically, horizontally, or diagonally). Otherwise, returns false.
 //If there is a winning combination on the board, checkWinner() should invoke setMessage(), passing in the appropriate string based on who won: 'Player X Won!' or 'Player O Won!'
 function checkWinner() {
-  var board = $("td").get();
+  //var board = $("td").get();
   var answer = false;
   var winner = "";
-  const board_array = board.map(square => square.innerHTML);
+  //const board_array = board.map(square => square.innerHTML);
   var test_array = [];
+  var board_array = getBoard();
 
-  function checkForX(element){
-    return ( (element === "X"));
-  }
-  function checkForO(element){
-    return ( (element === "O"));
-  }
+
 
   WIN_COMBINATIONS.forEach(function(combo){ //returns array of winning combinations, ex. [0,1,2]
     combo.forEach(function(index){
@@ -75,11 +97,15 @@ function checkWinner() {
   return answer;
 }//end checkWinner
 
-//Increments the turn variable by 1.
-//Invokes the updateState() function, passing it the element that was clicked.
-//Invokes checkWinner() to determine whether the move results in a winning play.
+//check to see if the board is full
+//check to see if there is a winner
+//if the board is full and there is no winner then the game is a tie/draw
+
+
+
+
 function doTurn() {
   turn += 1;
-  updateState(element);
+  updateState(this);
   checkWinner();
 };
