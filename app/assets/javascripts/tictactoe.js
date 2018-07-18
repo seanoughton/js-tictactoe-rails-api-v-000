@@ -117,7 +117,7 @@ function checkWinner() {
 
 function resetBoard(){
   $('td').html('')
-  //turn = 0;
+  turn = 0;
 }
 
 
