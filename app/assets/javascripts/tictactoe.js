@@ -1,6 +1,6 @@
 // Code your JavaScript / jQuery solution here
 $( document ).ready(function() {
-
+  attachListeners();
 });//end document.ready
 
 //Attaches the appropriate event listeners to the squares of the game board as well as for the button#save, button#previous, and button#clear elements.
@@ -16,6 +16,7 @@ function attachListeners(){
 var turn = 1;
 var board_full = false;
 
+
 const WIN_COMBINATIONS = [
   [0,1,2],
   [3,4,5],
@@ -29,7 +30,7 @@ const WIN_COMBINATIONS = [
 
 //Returns the token of the player whose turn it is, 'X' when the turn variable is even and 'O' when it is odd.
 function player() {
-  var player = ""
+  var player = "";
   if ((turn % 2) === 0) {
     player = "X"}
   else {
@@ -41,7 +42,8 @@ function player() {
 //Invokes player() and adds the returned string ('X' or 'O') to the clicked square on the game board.
 function updateState(square) {
   var token = player();
-  square.innerHTML = token; //$(this).html() sets what is put into the square based on the token X or O
+  //square.innerHTML = token; //$('td').html('')
+  square.html(token);
 }
 
 //Accepts a string and adds it to the div#message element in the DOM.
