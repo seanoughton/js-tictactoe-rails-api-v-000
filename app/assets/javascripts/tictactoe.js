@@ -108,11 +108,11 @@ function resetBoard(){
 
 
 function doTurn() {
-  turn += 1;
-  updateState(this);
   var board_array = getBoard();
   if (checkWinner() || fullBoard(board_array)) {
     turn = 0;
     resetBoard();
   };
+  turn += 1;
+  updateState(this);
 };
