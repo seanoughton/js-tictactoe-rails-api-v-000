@@ -47,8 +47,7 @@ function player() {
 //Invokes player() and adds the returned string ('X' or 'O') to the clicked square on the game board.
 function updateState(square) {
   var token = player();
-  square.innerHTML = token; //$('td').html('')
-  //square.html(token);
+  square.innerHTML = token; 
 }
 
 //Accepts a string and adds it to the div#message element in the DOM.
@@ -118,7 +117,7 @@ function checkWinner() {
 
 function resetBoard(){
   $('td').html('')
-  turn = 0;
+  //turn = 0;
 }
 
 
@@ -126,8 +125,7 @@ function doTurn(square) {
   updateState(square);
   turn += 1;
   var board_array = getBoard();
-  if (checkWinner() || fullBoard(board_array)) {
-    //turn = 0;
+  if ( checkWinner() ) { //|| fullBoard(board_array)) 
     resetBoard();
   };
 };
