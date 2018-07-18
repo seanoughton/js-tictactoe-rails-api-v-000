@@ -95,7 +95,7 @@ function checkWinner() {
     message = `Player ${winner} Won!`
     //reset the board
   }else{
-    message = "Tie game."
+    message = "Tie game.";
   };
 
   setMessage(message);
@@ -103,14 +103,15 @@ function checkWinner() {
 }//end checkWinner
 
 function resetBoard(){
-  $('td').html(" ")
+  $('td').html('')
 }
 
 
 function doTurn() {
   turn += 1;
   updateState(this);
-  if (checkWinner()) {
+  var board_array = getBoard();
+  if (checkWinner() || fullBoard(board_array)) {
     turn = 0;
     resetBoard();
   };
