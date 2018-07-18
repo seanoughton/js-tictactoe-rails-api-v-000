@@ -107,12 +107,12 @@ function resetBoard(){
 }
 
 
-function doTurn() {
+function doTurn(square) {
+  turn += 1;
+  updateState(square);
   var board_array = getBoard();
   if (checkWinner() || fullBoard(board_array)) {
     turn = 0;
     resetBoard();
   };
-  turn += 1;
-  updateState(this);
 };
