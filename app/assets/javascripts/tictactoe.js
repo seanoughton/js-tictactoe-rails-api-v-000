@@ -7,7 +7,7 @@ $( document ).ready(function() {
 //When you name your save and previous functions, make sure to call them something like saveGame() and previousGames(). If you call them save() and previous() you may run into problems with the test suite.
 function attachListeners(){
   $( "td" ).click(function() {
-    if (this.innerHTML.trim() == '') { //check if square is taken
+    if ((this.innerHTML.trim() == '') && checkWinner() === false) { //check if square is taken or game won
       doTurn(this);
     };
   });
