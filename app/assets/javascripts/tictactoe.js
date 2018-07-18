@@ -56,6 +56,7 @@ function fullBoard(board_array){
  } else{
    board_full = true;
  }
+ return board_full;
 }
 
 function getBoard(){
@@ -71,6 +72,7 @@ function checkWinner() {
   var winner = "";
   var test_array = [];
   var board_array = getBoard();
+  var message = "";
 
   WIN_COMBINATIONS.forEach(function(combo){ //returns array of winning combinations, ex. [0,1,2]
     combo.forEach(function(index){
@@ -82,24 +84,22 @@ function checkWinner() {
    } else if (test_array.every(checkForO)) {
       answer = true;
       winner = "O"
-    } else {
-      answer = false;
-      winner = "No Winner"
     };
     test_array = [];
   });
 
-  var message = `Player ${winner} Won!`
+//if answer === true then message = `Player ${winner} Won!`
+//if answer === false and fullBoard(board_array) === true then message = "Tie game."
+
+  if (answer === true && fullBoard(board_array) === false){
+    message = `Player ${winner} Won!`
+  }else{
+    message = "Tie game."
+  };
+
   setMessage(message);
   return answer;
 }//end checkWinner
-
-//check to see if the board is full
-//check to see if there is a winner
-//if the board is full and there is no winner then the game is a tie/draw
-
-
-
 
 function doTurn() {
   turn += 1;
