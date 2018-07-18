@@ -1,14 +1,15 @@
 // Code your JavaScript / jQuery solution here
 $( document ).ready(function() {
 
+});//end document.ready
+
 //Attaches the appropriate event listeners to the squares of the game board as well as for the button#save, button#previous, and button#clear elements.
 //When a user clicks on a square on the game board, the event listener should invoke doTurn() and pass it the element that was clicked.
 //When you name your save and previous functions, make sure to call them something like saveGame() and previousGames(). If you call them save() and previous() you may run into problems with the test suite.
-
-
-});//end document.ready
-
 function attachListeners(){
+  $( "td" ).click(function() {
+   console.log( "You clicked a square!" );
+});
 
 };
 
