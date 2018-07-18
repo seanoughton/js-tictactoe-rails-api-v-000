@@ -65,6 +65,14 @@ function getBoard(){
   return board.map(square => square.innerHTML);
 }
 
+function resetBoard(){
+  var board = $("td").get();
+  function clearSquares(item){
+    item.innerHTML = "";
+  }
+  board.forEach(clearSquares())
+}
+
 //Returns true if the current board contains any winning combinations (three X or O tokens in a row, vertically, horizontally, or diagonally). Otherwise, returns false.
 //If there is a winning combination on the board, checkWinner() should invoke setMessage(), passing in the appropriate string based on who won: 'Player X Won!' or 'Player O Won!'
 function checkWinner() {
@@ -93,6 +101,7 @@ function checkWinner() {
 
   if (answer === true && fullBoard(board_array) === false){
     message = `Player ${winner} Won!`
+    //reset the board
   }else{
     message = "Tie game."
   };
@@ -104,5 +113,8 @@ function checkWinner() {
 function doTurn() {
   turn += 1;
   updateState(this);
-  checkWinner();
+  if (checkWinner()) {
+    turn = 0;
+    resetBoard();
+  };
 };
