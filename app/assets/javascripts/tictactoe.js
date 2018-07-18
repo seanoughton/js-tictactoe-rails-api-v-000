@@ -14,7 +14,7 @@ function attachListeners(){
 
 };
 
-var turn = 0;
+var turn = 2;
 var board_full = false;
 
 
@@ -33,9 +33,9 @@ const WIN_COMBINATIONS = [
 function player() {
   var player = "";
   if ((turn % 2) === 0) {
-    player = "O"}
+    player = "X"}
   else {
-      player = "X"
+      player = "O"
     }
   return player;
 };
