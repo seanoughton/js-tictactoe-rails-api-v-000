@@ -105,9 +105,9 @@ function checkWinner() {
     test_array = [];
   });
 
-  if (answer === true){
+  if (answer === true ){
     message = `Player ${winner} Won!`
-  }
+    //reset the board
   }else if (fullBoard(board_array) === true) {
     message = "Tie game.";
   };
