@@ -8,6 +8,7 @@ $( document ).ready(function() {
 //When you name your save and previous functions, make sure to call them something like saveGame() and previousGames(). If you call them save() and previous() you may run into problems with the test suite.
 function attachListeners(){
   $( "td" ).click(function() {
+    debugger;
    doTurn($(this));
   });
 
@@ -42,8 +43,8 @@ function player() {
 //Invokes player() and adds the returned string ('X' or 'O') to the clicked square on the game board.
 function updateState(square) {
   var token = player();
-  //square.innerHTML = token; //$('td').html('')
-  square.html(token);
+  square.innerHTML = token; //$('td').html('')
+  //square.html(token);
 }
 
 //Accepts a string and adds it to the div#message element in the DOM.
