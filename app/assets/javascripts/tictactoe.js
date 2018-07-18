@@ -41,6 +41,7 @@ function setMessage(string) {
 //Returns true if the current board contains any winning combinations (three X or O tokens in a row, vertically, horizontally, or diagonally). Otherwise, returns false.
 //If there is a winning combination on the board, checkWinner() should invoke setMessage(), passing in the appropriate string based on who won: 'Player X Won!' or 'Player O Won!'
 function checkWinner() {
+<<<<<<< HEAD
   var board = $("td").get();
   var answer = false;
   var winner = "";
@@ -53,6 +54,17 @@ function checkWinner() {
   function checkForO(element){
     return ( (element === "O"));
   }
+=======
+  //has to get the current state of the board
+  //iterate through board using jquery to grab the html inside each td and create an array of those values
+  //compare the board array to the winning combinations
+  var board = $("td").each(function() {return $(this)});
+  board.forEach(function(square) {
+    console.log(element);
+  });
+
+  const board_array = board.map(square => square.innerHTML);
+>>>>>>> 77558264956fcca0a7b592c7ce365603bcb15a5a
 
   WIN_COMBINATIONS.forEach(function(combo){ //returns array of winning combinations, ex. [0,1,2]
     combo.forEach(function(index){
