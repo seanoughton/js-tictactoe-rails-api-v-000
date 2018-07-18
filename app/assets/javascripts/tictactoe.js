@@ -33,9 +33,9 @@ const WIN_COMBINATIONS = [
 function player() {
   var player = "";
   if ((turn % 2) === 0) {
-    player = "X"}
+    player = "O"}
   else {
-      player = "O"
+      player = "X"
     }
   return player;
 };
