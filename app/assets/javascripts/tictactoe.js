@@ -124,6 +124,8 @@ function doTurn(square) {
   updateState(square); // add X or O to the board
   turn += 1; // increment the turn count
 
+  //have to account for edge case where it is both a full board and a winner
+
   if ( checkWinner() === true ) { // check to see if there is a winner
     //turn = 0;
     //resetBoard();
@@ -131,7 +133,7 @@ function doTurn(square) {
   };
 
   var board_array = getBoard();
-  if ( fullBoard(board_array) === true) { // check to see if the board is full
+  if ( (fullBoard(board_array)) === true && (checkWinner() === false)) { // check to see if the board is full
     setMessage('Tie game.');
     resetBoard();
   };
