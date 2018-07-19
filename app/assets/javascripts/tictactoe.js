@@ -47,17 +47,17 @@ function attachListeners(){
   $("#save").click(function() {
     //{state: ["X", "O", "X", "", "O", "O", "", "", "X"]}
 
-    //var value = {"state": getBoard()};
+    var value = {"state": getBoard()};
     if (gameSaved === false) {
-      saveGame();
+      saveGame(value);
       /**
       $.post('/games', value).done(function(data) {
         var game = data;
         gameId = game.data.id;
         gameSaved = true;
-      }); **/
-
-    };
+      }); 
+    };**/
+    
     if (gameSaved === true) {
       $.ajax({
         url: `/games/${gameId}`,
@@ -85,14 +85,14 @@ function attachListeners(){
 
 ///// HELPER METHODS
 
-function saveGame() {
-  var value = { "state": getBoard() };
+function saveGame(value) {
+  //var value = { "state": getBoard() };
   $.post('/games', value).done(function(data) {
     var game = data;
     gameId = game.data.id;
     gameSaved = true;
   });
-};
+}; 
 
 
 
