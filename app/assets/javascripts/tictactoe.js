@@ -3,8 +3,14 @@ $( document ).ready(function() {
   attachListeners();
 });//end document.ready
 
+
+var turn = 0;
+var board_full = false;
+
+
 function attachListeners(){
   $( "td" ).click(function() {
+    
     if ((this.innerHTML.trim() == '') && checkWinner() === false) { //check if square is taken or game won
       doTurn(this);
     };
@@ -12,8 +18,7 @@ function attachListeners(){
 
 };
 
-var turn = 0;
-var board_full = false;
+
 
 
 
@@ -130,7 +135,9 @@ function doTurn(square) {
     resetBoard();
   };
 
-  if (fullBoard(board_array) === true) { // thinks that a cleared board is a tied game
+  if (fullBoard(board_array) === true) { 
     resetBoard();
   };
+
+  console.log(turn);
 };
