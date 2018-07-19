@@ -49,7 +49,7 @@ function checkforEmpty(element){
 
 function fullBoard(board_array){
   //var n = fruits.includes("Mango");
-  if ( board_array.includes(' ') ) {
+  if ( board_array.includes('') ) {
    board_full = false;
  } else {
    board_full = true;
@@ -97,7 +97,7 @@ function checkWinner() {
 function resetBoard(){
   var squares = $('td').get()
   squares.forEach(function(element){
-    element.innerHTML = ' '; //has to match checkforEmpty innerText
+    element.innerHTML = ''; //has to match checkforEmpty innerText
   });
 }
 
@@ -125,14 +125,16 @@ function doTurn(square) {
   updateState(square); // add X or O to the board
   turn += 1; // increment the turn count
 
+  var board_array = getBoard();
+  if ( fullBoard(board_array) === true) { // check to see if the board is full
+    setMessage('Tie game.');
+    resetBoard();
+  };
+
   if ( checkWinner() === true ) { // check to see if there is a winner
     resetBoard();
   };
 
-  var board_array = getBoard();
-  if ( fullBoard(board_array) === true && checkWinner() === false) { // check to see if the board is full
-    setMessage('Tie game.');
-    //resetBoard();
-  };
+
 
 };
