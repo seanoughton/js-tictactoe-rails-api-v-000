@@ -45,7 +45,7 @@ function attachListeners(){
 
   $("#save").click(function() {
     //{state: ["X", "O", "X", "", "O", "O", "", "", "X"]}
-    var state = getBoard();
+    var value = {"state": getBoard()};
     debugger;
 
     $.post('/games', "test");
