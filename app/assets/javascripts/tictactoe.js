@@ -30,7 +30,7 @@ function attachListeners(){
   });
 
   $("#previous").click(function() {
-    $.get("/games/", function(data) {
+    $.get("/games", function(data) {
     
     });
   });
