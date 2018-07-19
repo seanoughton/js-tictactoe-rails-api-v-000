@@ -124,8 +124,6 @@ function doTurn(square) {
   updateState(square); // add X or O to the board
   turn += 1; // increment the turn count
 
-  //have to account for edge case where it is both a full board and a winner
-
   if ( checkWinner() === true ) { // check to see if there is a winner
     turn = 0;
     resetBoard();
