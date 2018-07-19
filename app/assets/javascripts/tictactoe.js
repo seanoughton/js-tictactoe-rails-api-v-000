@@ -119,7 +119,7 @@ function checkWinner() {
 function resetBoard(){
   var squares = $('td').get()
   squares.forEach(function(element){
-    element.innerText = ' '; //has to match checkforEmpty
+    element.innerHTML = ''; //has to match checkforEmpty innerText
   });
   //turn = 0;
 }
@@ -129,10 +129,12 @@ function doTurn(square) {
   updateState(square);
   turn += 1;
 
+
   var board_array = getBoard();
 
   if ( checkWinner() === true ) {
     resetBoard();
+    turn = 0;
   };
 
   if (fullBoard(board_array) === true) {
