@@ -56,7 +56,7 @@ function attachListeners(){
         gameSaved = true;
       }); **/
 
-    }
+    };
     if (gameSaved === true) {
       $.ajax({
         url: `/games/${gameId}`,
@@ -90,6 +90,7 @@ function saveGame(){
     var game = data;
     gameId = game.data.id;
     gameSaved = true;
+  };
 };
 
 
