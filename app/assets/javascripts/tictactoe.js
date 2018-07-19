@@ -124,17 +124,19 @@ function doTurn(square) {
   updateState(square); // add X or O to the board
   turn += 1; // increment the turn count
 
+  if ( checkWinner() === true ) { // check to see if there is a winner
+    //turn = 0;
+    //resetBoard();
+    console.log(turn);
+  };
+
   var board_array = getBoard();
   if ( fullBoard(board_array) === true) { // check to see if the board is full
     setMessage('Tie game.');
     resetBoard();
   };
 
-  if ( checkWinner() === true ) { // check to see if there is a winner
-    //turn = 0;
-    //resetBoard();
-    console.log(turn);
-  };
+
 
 
 
