@@ -77,6 +77,7 @@ function checkWinner() {
     if (test_array.every(checkForX)) {
      answer = true;
      winner = "X"
+     turn = 0;
    } else if (test_array.every(checkForO)) {
       answer = true;
       winner = "O"
@@ -130,8 +131,8 @@ function doTurn(square) {
   };
 
   if ( checkWinner() === true ) { // check to see if there is a winner
-    turn = 0;
-    resetBoard();
+    //turn = 0;
+    //resetBoard();
     console.log(turn);
   };
 
