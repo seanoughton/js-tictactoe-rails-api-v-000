@@ -85,13 +85,13 @@ function attachListeners(){
 
 ///// HELPER METHODS
 
-function saveGame(){
+function saveGame() {
   var value = { "state": getBoard() };
   $.post('/games', value).done(function(data) {
     var game = data;
     gameId = game.data.id;
     gameSaved = true;
-  }
+  });
 };
 
 
