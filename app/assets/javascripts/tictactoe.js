@@ -130,9 +130,9 @@ function doTurn(square) {
   };
 
   var board_array = getBoard();
-  if (fullBoard(board_array) === true) { // check to see if the board is full
-    setMessage("Tie game.");
-    resetBoard();
+  if ( fullBoard(board_array) === true && checkWinner() === false) { // check to see if the board is full
+    setMessage('Tie game.');
+    //resetBoard();
   };
 
 };
