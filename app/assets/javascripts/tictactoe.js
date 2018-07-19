@@ -49,18 +49,15 @@ function attachListeners(){
     // if the game exists , then send a patch request /games/:id
     var value = {"state": getBoard()};
     if (gameSaved === false) {
-      //$.post('/games', value);
       $.post('/games', value).done(function(data) {
         var game = data;
-        debugger;
-        //$("#postTitle").text(post["title"]);
-        //$("#postBody").text(post["description"]);
+        gameId = game.data.id;
       });
       
     } else {
       //need the game id
       $.ajax({
-        url: '/games/1',
+        url: `/games/${gameId}`,
         type: 'PATCH',
         data: value
       });
