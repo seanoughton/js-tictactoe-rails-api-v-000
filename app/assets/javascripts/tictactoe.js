@@ -77,7 +77,6 @@ function checkWinner() {
     if (test_array.every(checkForX)) {
      answer = true;
      winner = "X"
-     turn = 0;
    } else if (test_array.every(checkForO)) {
       answer = true;
       winner = "O"
@@ -127,15 +126,15 @@ function doTurn(square) {
   //have to account for edge case where it is both a full board and a winner
 
   if ( checkWinner() === true ) { // check to see if there is a winner
-    //turn = 0;
-    //resetBoard();
-    console.log(turn);
+    turn = 0;
+    resetBoard();
   };
 
   var board_array = getBoard();
   if ( (fullBoard(board_array)) === true && (checkWinner() === false)) { // check to see if the board is full
     setMessage('Tie game.');
     resetBoard();
+    turn = 0;
   };
 
 
