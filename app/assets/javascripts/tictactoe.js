@@ -50,14 +50,14 @@ function attachListeners(){
     var value = {"state": getBoard()};
     if (gameSaved === false) {
       saveGame(value);
-      /**
-      $.post('/games', value).done(function(data) {
-        var game = data;
-        gameId = game.data.id;
-        gameSaved = true;
-      }); **/
+
+      //$.post('/games', value).done(function(data) {
+        //var game = data;
+        //gameId = game.data.id;
+        //gameSaved = true;
+      //});
     };
-    
+
     if (gameSaved === true) {
       $.ajax({
         url: `/games/${gameId}`,
@@ -80,19 +80,22 @@ function attachListeners(){
     };
   });
 
+  $("#clear").click(function() {
+    console.log("clicked saved game")
+  };
+
 };
 /////////////////////// end listeners
 
 ///// HELPER METHODS
 
 function saveGame(value) {
-  //var value = { "state": getBoard() };
   $.post('/games', value).done(function(data) {
     var game = data;
     gameId = game.data.id;
     gameSaved = true;
   });
-}; 
+};
 
 
 
@@ -188,15 +191,18 @@ function updateState(square) {
 function doTurn(square) {
   updateState(square); // add X or O to the board
   turn += 1; // increment the turn count
+  var value = {"state": getBoard()};
 
   if ( checkWinner() === true ) { // check to see if there is a winner
     turn = 0;
+    saveGame(value);
     resetBoard();
   };
 
   var board_array = getBoard();
   if ( (fullBoard(board_array)) === true && (checkWinner() === false)) { // check to see if the board is full
     setMessage('Tie game.');
+    saveGame(value);
     resetBoard();
     turn = 0;
   };
