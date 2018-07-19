@@ -45,25 +45,29 @@ function attachListeners(){
 
   $("#save").click(function() {
     //{state: ["X", "O", "X", "", "O", "O", "", "", "X"]}
-    //check to see if the game already exists, you have to know 
-    // if the game exists , then send a patch request /games/:id
+
     var value = {"state": getBoard()};
     if (gameSaved === false) {
       $.post('/games', value).done(function(data) {
         var game = data;
         gameId = game.data.id;
+        gameSaved = true;
       });
-      
-    } else {
-      //need the game id
+
+    }
+    if (gameSaved === true) {
       $.ajax({
         url: `/games/${gameId}`,
         type: 'PATCH',
         data: value
       });
     }
-    gameSaved = true;
-  });
+
+  });// end save /update 
+
+  $("#clear").click(function() {
+    console.log("clear");
+  };
 
 };
 
