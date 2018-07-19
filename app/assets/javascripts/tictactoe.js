@@ -66,8 +66,11 @@ function attachListeners(){
   });// end save /update 
 
   $("#clear").click(function() {
-    console.log("clear");
-  };
+    // clears board if game is unsaved 
+    if (gameSaved === false) {
+      resetBoard();
+    }
+  });
 
 };
 
