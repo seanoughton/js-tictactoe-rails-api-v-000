@@ -80,9 +80,12 @@ function attachListeners(){
     };
   });
 
-  $("#clear").click(function() {
-    console.log("clicked saved game")
-  };
+  $(document).on('click', '#games :button', function(){
+      $.get(`/games/${this.id}`, function(response) {
+        var savedBoard = response.data.attributes.state;
+        //load this into the board
+      });
+  });
 
 };
 /////////////////////// end listeners
