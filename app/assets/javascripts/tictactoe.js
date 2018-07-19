@@ -44,9 +44,11 @@ function attachListeners(){
   });
 
   $("#save").click(function() {
+    //{state: ["X", "O", "X", "", "O", "O", "", "", "X"]}
+    var state = getBoard();
     debugger;
-    var values = $(this).serialize();
-    var posting = $.post('/games', values);
+
+    $.post('/games', "test");
 
   });
 
