@@ -67,6 +67,7 @@ function attachListeners(){
 
   $("#clear").click(function() {
     // clears board if game is unsaved
+    resetBoard();
     if (gameSaved === false) {
       resetBoard();
     }
