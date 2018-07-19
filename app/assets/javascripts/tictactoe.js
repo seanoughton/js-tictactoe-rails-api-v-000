@@ -22,6 +22,7 @@ const WIN_COMBINATIONS = [
   [6,4,2]
 ];
 
+
 ////////////////////////////////////////////////////////////////
 
 function attachListeners(){
@@ -85,12 +86,12 @@ function attachListeners(){
 ///// HELPER METHODS
 
 function saveGame(){
-  var value = {"state": getBoard()};
+  var value = { "state": getBoard() };
   $.post('/games', value).done(function(data) {
     var game = data;
     gameId = game.data.id;
     gameSaved = true;
-  };
+  }
 };
 
 
@@ -125,6 +126,8 @@ function getBoard(){
   //const board_array = board.map(square => square.innerHTML);
   return board.map(square => square.innerHTML); //returns an array of board values, the "X"'s and "O"'s
 }
+
+
 
 function checkWinner() {
   var answer = false; //this will be the return value True = there is a winner, False = no winner
