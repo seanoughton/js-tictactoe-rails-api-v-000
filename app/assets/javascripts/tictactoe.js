@@ -43,6 +43,12 @@ function attachListeners(){
     });
   });
 
+  $("#save").click(function() {
+    $.post("/games", function() {
+  
+    });
+  });
+
 };
 
 
