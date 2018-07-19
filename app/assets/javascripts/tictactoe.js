@@ -3,8 +3,6 @@ $( document ).ready(function() {
   attachListeners();
 });//end document.ready
 
-
-//When you name your save and previous functions, make sure to call them something like saveGame() and previousGames(). If you call them save() and previous() you may run into problems with the test suite.
 function attachListeners(){
   $( "td" ).click(function() {
     if ((this.innerHTML.trim() == '') && checkWinner() === false) { //check if square is taken or game won
@@ -47,7 +45,7 @@ function player() {
 //Invokes player() and adds the returned string ('X' or 'O') to the clicked square on the game board.
 function updateState(square) {
   var token = player();
-  square.innerHTML = token; 
+  square.innerHTML = token;
 }
 
 //Accepts a string and adds it to the div#message element in the DOM.
@@ -81,8 +79,6 @@ function getBoard(){
   return board.map(square => square.innerHTML);
 }
 
-//Returns true if the current board contains any winning combinations (three X or O tokens in a row, vertically, horizontally, or diagonally). Otherwise, returns false.
-//If there is a winning combination on the board, checkWinner() should invoke setMessage(), passing in the appropriate string based on who won: 'Player X Won!' or 'Player O Won!'
 function checkWinner() {
   var answer = false;
   var winner = "";
@@ -116,7 +112,10 @@ function checkWinner() {
 }//end checkWinner
 
 function resetBoard(){
-  $('td').html('')
+  var squares = $('td').get()
+  squares.forEach(function(element){
+    element.innerText = ' ';
+  });
   turn = 0;
 }
 
@@ -124,8 +123,14 @@ function resetBoard(){
 function doTurn(square) {
   updateState(square);
   turn += 1;
+
   var board_array = getBoard();
-  if ( checkWinner() ) { //|| fullBoard(board_array)) 
+
+  if ( checkWinner() ) {
+    resetBoard();
+  };
+
+  if (fullBoard(board_array)) { // thinks that a cleared board is a tied game
     resetBoard();
   };
 };
