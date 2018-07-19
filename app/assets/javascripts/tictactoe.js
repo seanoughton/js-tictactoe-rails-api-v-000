@@ -10,7 +10,7 @@ var board_full = false;
 
 function attachListeners(){
   $( "td" ).click(function() {
-    
+
     if ((this.innerHTML.trim() == '') && checkWinner() === false) { //check if square is taken or game won
       doTurn(this);
     };
@@ -121,7 +121,7 @@ function resetBoard(){
   squares.forEach(function(element){
     element.innerText = ' '; //has to match checkforEmpty
   });
-  turn = 0;
+  //turn = 0;
 }
 
 
@@ -135,7 +135,7 @@ function doTurn(square) {
     resetBoard();
   };
 
-  if (fullBoard(board_array) === true) { 
+  if (fullBoard(board_array) === true) {
     resetBoard();
   };
 
