@@ -67,10 +67,15 @@ function attachListeners(){
 
   $("#clear").click(function() {
     // clears board if game is unsaved
-    resetBoard();
+
+    if (gameSaved === true) {
+      resetBoard();
+      turn = 0;
+    };
     if (gameSaved === false) {
       resetBoard();
-    }
+      turn = 0;
+    };
   });
 
 };
