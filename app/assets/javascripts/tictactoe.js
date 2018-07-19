@@ -11,8 +11,10 @@ var board_full = false;
 function attachListeners(){
   $( "td" ).click(function() {
 
-    if ((this.innerHTML.trim() == '') && checkWinner() === false) { //check if square is taken or game won
-      doTurn(this);
+    if ((this.innerHTML.trim() == '') && checkWinner() === false) {
+      doTurn(this); //if the square is empty and there is no winner then call doTurn
+      //should there also be a check for fullBoard
+      //do you have to reset checkWinner() after a game is won
     };
   });
 
@@ -30,25 +32,7 @@ const WIN_COMBINATIONS = [
   [6,4,2]
 ];
 
-//Returns the token of the player whose turn it is, 'X' when the turn variable is even and 'O' when it is odd.
 
-function isEven(num) {
-    return num % 2 === 0;
-}
-
-function player() {
-  var player = "O";
-  if ( isEven(turn) ) {
-    player = "X"
-  };
-  return player;
-};
-
-//Invokes player() and adds the returned string ('X' or 'O') to the clicked square on the game board.
-function updateState(square) {
-  var token = player();
-  square.innerHTML = token;
-}
 
 //Accepts a string and adds it to the div#message element in the DOM.
 function setMessage(string) {
@@ -78,7 +62,7 @@ function fullBoard(board_array){
 function getBoard(){
   var board = $("td").get();
   //const board_array = board.map(square => square.innerHTML);
-  return board.map(square => square.innerHTML);
+  return board.map(square => square.innerHTML); //returns an array of board values, the "X"'s and "O"'s
 }
 
 function checkWinner() {
@@ -121,22 +105,40 @@ function resetBoard(){
   //turn = 0;
 }
 
+//Returns the token of the player whose turn it is, 'X' when the turn variable is even and 'O' when it is odd.
+
+function isEven(num) {
+    return num % 2 === 0;
+}
+
+function player() {
+  var player = "O";
+  if ( isEven(turn) ) {
+    player = "X"
+  };
+  return player;
+};
+
+//Invokes player() and adds the returned string ('X' or 'O') to the clicked square on the game board.
+function updateState(square) {
+  var token = player();
+  square.innerHTML = token;
+}
 
 function doTurn(square) {
   updateState(square);
   turn += 1;
 
-
   var board_array = getBoard();
 
   if ( checkWinner() === true ) {
     resetBoard();
-    turn = 0;
+    message = "";
   };
 
   if (fullBoard(board_array) === true) {
     resetBoard();
-    turn = 0;
+    message = "";
   };
 
   console.log(turn);
