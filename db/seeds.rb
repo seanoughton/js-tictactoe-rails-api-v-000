@@ -7,3 +7,6 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 Game.create(state: ["X", "O", "X", "", "O", "O", "", "", "X"])
+Game.create(state: ["O", "O", "X", "", "X", " ", "O", "", "X"])
+Game.create(state: ["X", "X", "X", "", "O", "O", "", "", "X"])
+Game.create(state: ["O", "O", "O", "", "X", "X", "", "", "X"])
