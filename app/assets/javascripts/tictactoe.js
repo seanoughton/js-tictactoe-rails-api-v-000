@@ -46,13 +46,15 @@ function attachListeners(){
   $("#save").click(function() {
     //{state: ["X", "O", "X", "", "O", "O", "", "", "X"]}
 
-    var value = {"state": getBoard()};
+    //var value = {"state": getBoard()};
     if (gameSaved === false) {
+      saveGame();
+      /**
       $.post('/games', value).done(function(data) {
         var game = data;
         gameId = game.data.id;
         gameSaved = true;
-      });
+      }); **/
 
     }
     if (gameSaved === true) {
@@ -66,11 +68,10 @@ function attachListeners(){
   });// end save /update
 
   $("#clear").click(function() {
-    // clears board if game is unsaved
-
     if (gameSaved === true) {
       resetBoard();
       turn = 0;
+      gameSaved = false;
     };
     if (gameSaved === false) {
       resetBoard();
@@ -79,9 +80,20 @@ function attachListeners(){
   });
 
 };
-
+/////////////////////// end listeners
 
 ///// HELPER METHODS
+
+function saveGame(){
+  var value = {"state": getBoard()};
+  $.post('/games', value).done(function(data) {
+    var game = data;
+    gameId = game.data.id;
+    gameSaved = true;
+};
+
+
+
 function setMessage(string) {
   $( "#message" ).html(string);
 }
