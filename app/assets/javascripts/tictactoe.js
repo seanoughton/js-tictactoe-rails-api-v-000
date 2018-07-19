@@ -114,7 +114,7 @@ function checkWinner() {
 function resetBoard(){
   var squares = $('td').get()
   squares.forEach(function(element){
-    element.innerText = ' ';
+    element.innerText = ' '; //has to match checkforEmpty
   });
   turn = 0;
 }
@@ -126,11 +126,11 @@ function doTurn(square) {
 
   var board_array = getBoard();
 
-  if ( checkWinner() ) {
+  if ( checkWinner() === true ) {
     resetBoard();
   };
 
-  if (fullBoard(board_array)) { // thinks that a cleared board is a tied game
+  if (fullBoard(board_array) === true) { // thinks that a cleared board is a tied game
     resetBoard();
   };
 };
