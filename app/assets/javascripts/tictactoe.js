@@ -31,7 +31,14 @@ function attachListeners(){
 
   $("#previous").click(function() {
     $.get("/games", function(data) {
-    
+    //take the games returned, parse them out as individual games and put them in the div#games
+    //the return data should be a json array object 
+    //iterate over that and parse it into html 
+    // put that html into the div#games
+        //data = $.parseJSON(data);
+        $.each(data, function(i, item) {
+            alert(item);
+        });
     });
   });
 
