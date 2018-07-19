@@ -6,6 +6,20 @@ $( document ).ready(function() {
 
 var turn = 0;
 var board_full = false;
+var message = "";
+
+const WIN_COMBINATIONS = [
+  [0,1,2],
+  [3,4,5],
+  [6,7,8],
+  [0,3,6],
+  [1,4,7],
+  [2,5,8],
+  [0,4,8],
+  [6,4,2]
+];
+
+
 
 
 function attachListeners(){
@@ -19,18 +33,6 @@ function attachListeners(){
   });
 
 };
-
-
-const WIN_COMBINATIONS = [
-  [0,1,2],
-  [3,4,5],
-  [6,7,8],
-  [0,3,6],
-  [1,4,7],
-  [2,5,8],
-  [0,4,8],
-  [6,4,2]
-];
 
 
 
@@ -51,7 +53,7 @@ function checkforEmpty(element){
 }
 
 function fullBoard(board_array){
-  if (board_array.some(checkforEmpty)) {
+  if (board_array.some(checkforEmpty)) { //if there are any empty spaces, board is not full
    board_full = false;
  } else {
    board_full = true;
@@ -66,11 +68,10 @@ function getBoard(){
 }
 
 function checkWinner() {
-  var answer = false;
+  var answer = false; //this will be the return value True = there is a winner, False = no winner
   var winner = "";
   var test_array = [];
   var board_array = getBoard();
-  var message = "";
 
   WIN_COMBINATIONS.forEach(function(combo){ //returns array of winning combinations, ex. [0,1,2]
     combo.forEach(function(index){
@@ -102,7 +103,7 @@ function resetBoard(){
   squares.forEach(function(element){
     element.innerHTML = ''; //has to match checkforEmpty innerText
   });
-  //turn = 0;
+  turn = 0;
 }
 
 //Returns the token of the player whose turn it is, 'X' when the turn variable is even and 'O' when it is odd.
@@ -113,7 +114,7 @@ function isEven(num) {
 
 function player() {
   var player = "O";
-  if ( isEven(turn) ) {
+  if ( isEven(turn) ) { //if the turn is an even number, player is X
     player = "X"
   };
   return player;
@@ -126,17 +127,16 @@ function updateState(square) {
 }
 
 function doTurn(square) {
-  updateState(square);
-  turn += 1;
+  updateState(square); // add X or O to the board
+  turn += 1; // increment the turn count
 
-  var board_array = getBoard();
-
-  if ( checkWinner() === true ) {
+  if ( checkWinner() === true ) { // check to see if there is a winner
     resetBoard();
     message = "";
   };
 
-  if (fullBoard(board_array) === true) {
+  var board_array = getBoard();
+  if (fullBoard(board_array) === true) { // check to see if the board is full
     resetBoard();
     message = "";
   };
