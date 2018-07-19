@@ -85,10 +85,16 @@ function attachListeners(){
         var savedBoard = response.data.attributes.state;
         //load this into the board
         //iterate through the square and put the board elements into each square
+
+
+
         var squares = $('td').get()
-        squares.forEach(function(element){
-          element.innerHTML = 'X'; //has to match checkforEmpty innerText
+
+        $.each(squares, function( index, value ) {
+          savedValue = savedBoard[index];
+          value.innerHTML= savedValue;
         });
+
       });
   });
 
