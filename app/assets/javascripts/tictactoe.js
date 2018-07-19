@@ -48,14 +48,12 @@ function checkforEmpty(element){
 }
 
 function fullBoard(board_array){
-  //var n = fruits.includes("Mango");
-  if ( board_array.includes('') ) {
+  if ( board_array.includes('') || board_array.includes(' ')) {
    board_full = false;
  } else {
    board_full = true;
    message = "Tie game.";
  }
- //setMessage(message);
  return board_full;
 }
 
@@ -89,6 +87,7 @@ function checkWinner() {
   if (answer === true ){
     message = `Player ${winner} Won!`
   };
+  console.log(answer);
 
   setMessage(message);
   return answer;
