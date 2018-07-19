@@ -87,7 +87,6 @@ function checkWinner() {
   if (answer === true ){
     message = `Player ${winner} Won!`
   };
-  console.log(answer);
 
   setMessage(message);
   return answer;
@@ -131,7 +130,9 @@ function doTurn(square) {
   };
 
   if ( checkWinner() === true ) { // check to see if there is a winner
+    turn = 0;
     resetBoard();
+    console.log(turn);
   };
 
 
