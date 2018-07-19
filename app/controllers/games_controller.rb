@@ -16,6 +16,7 @@ class GamesController < ApplicationController
   end
 
   def update
+    byebug
     @game.update(game_params)
     render json: @game
   end

@@ -9,6 +9,7 @@ var board_full = false;
 var message = "";
 var winner = "";
 var gameSaved = false;
+var gameId = 0;
 
 const WIN_COMBINATIONS = [
   [0,1,2],
@@ -47,10 +48,22 @@ function attachListeners(){
     //check to see if the game already exists, you have to know 
     // if the game exists , then send a patch request /games/:id
     var value = {"state": getBoard()};
-    if gameSaved === false {
-      $.post('/games', value);
+    if (gameSaved === false) {
+      //$.post('/games', value);
+      $.post('/games', value).done(function(data) {
+        var game = data;
+        debugger;
+        //$("#postTitle").text(post["title"]);
+        //$("#postBody").text(post["description"]);
+      });
+      
     } else {
-      $.patch('/games', value);
+      //need the game id
+      $.ajax({
+        url: '/games/1',
+        type: 'PATCH',
+        data: value
+      });
     }
     gameSaved = true;
   });
