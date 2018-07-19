@@ -3,7 +3,7 @@ $( document ).ready(function() {
   attachListeners();
 });//end document.ready
 
-
+/// SET Variables
 var turn = 0;
 var board_full = false;
 var message = "";
@@ -19,24 +19,19 @@ const WIN_COMBINATIONS = [
   [6,4,2]
 ];
 
-
-
+////////////////////////////////////////////////////////////////
 
 function attachListeners(){
   $( "td" ).click(function() {
-
     if ((this.innerHTML.trim() == '') && checkWinner() === false) {
-      doTurn(this); //if the square is empty and there is no winner then call doTurn
-      //should there also be a check for fullBoard
-      //do you have to reset checkWinner() after a game is won
+      doTurn(this);
     };
   });
 
 };
 
 
-
-//Accepts a string and adds it to the div#message element in the DOM.
+///// HELPER METHODS
 function setMessage(string) {
   $( "#message" ).html(string);
 }
@@ -53,11 +48,14 @@ function checkforEmpty(element){
 }
 
 function fullBoard(board_array){
-  if (board_array.some(checkforEmpty)) { //if there are any empty spaces, board is not full
+  //var n = fruits.includes("Mango");
+  if ( board_array.includes(' ') ) {
    board_full = false;
  } else {
    board_full = true;
+   message = "Tie game.";
  }
+ setMessage(message);
  return board_full;
 }
 
@@ -72,6 +70,7 @@ function checkWinner() {
   var winner = "";
   var test_array = [];
   var board_array = getBoard();
+  message = "";
 
   WIN_COMBINATIONS.forEach(function(combo){ //returns array of winning combinations, ex. [0,1,2]
     combo.forEach(function(index){
@@ -89,9 +88,6 @@ function checkWinner() {
 
   if (answer === true ){
     message = `Player ${winner} Won!`
-    //reset the board
-  }else if (fullBoard(board_array) === true) {
-    message = "Tie game.";
   };
 
   setMessage(message);
@@ -101,7 +97,7 @@ function checkWinner() {
 function resetBoard(){
   var squares = $('td').get()
   squares.forEach(function(element){
-    element.innerHTML = ''; //has to match checkforEmpty innerText
+    element.innerHTML = ' '; //has to match checkforEmpty innerText
   });
   turn = 0;
 }
@@ -132,14 +128,11 @@ function doTurn(square) {
 
   if ( checkWinner() === true ) { // check to see if there is a winner
     resetBoard();
-    message = "";
   };
 
   var board_array = getBoard();
   if (fullBoard(board_array) === true) { // check to see if the board is full
     resetBoard();
-    message = "";
   };
 
-  console.log(turn);
 };
