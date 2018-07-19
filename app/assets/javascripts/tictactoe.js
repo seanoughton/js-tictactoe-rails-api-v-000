@@ -31,9 +31,8 @@ function attachListeners(){
 
   $("#previous").click(function() {
     $.get("/games/", function(data) {
-      //var id = $(this).data("id");
-      //what are you getting back from this request 
-    };
+    
+    });
   });
 
 };
