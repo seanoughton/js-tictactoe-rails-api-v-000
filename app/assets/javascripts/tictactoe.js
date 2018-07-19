@@ -7,6 +7,7 @@ $( document ).ready(function() {
 var turn = 0;
 var board_full = false;
 var message = "";
+var winner = "";
 
 const WIN_COMBINATIONS = [
   [0,1,2],
@@ -65,7 +66,6 @@ function getBoard(){
 
 function checkWinner() {
   var answer = false; //this will be the return value True = there is a winner, False = no winner
-  var winner = "";
   var test_array = [];
   var board_array = getBoard();
   message = "";
@@ -88,7 +88,7 @@ function checkWinner() {
     message = `Player ${winner} Won!`
   };
 
-  setMessage(message);
+  //setMessage(message);
   return answer;
 }//end checkWinner
 
@@ -127,6 +127,7 @@ function doTurn(square) {
 
   if ( checkWinner() === true ) { // check to see if there is a winner
     turn = 0;
+    setMessage(`Player ${winner} Won!`);
     resetBoard();
   };
 
