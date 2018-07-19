@@ -44,9 +44,10 @@ function attachListeners(){
   });
 
   $("#save").click(function() {
-    $.post("/games", function() {
-  
-    });
+    debugger;
+    var values = $(this).serialize();
+    var posting = $.post('/games', values);
+
   });
 
 };
