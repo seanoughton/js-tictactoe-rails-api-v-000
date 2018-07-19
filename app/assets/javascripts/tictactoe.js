@@ -86,9 +86,10 @@ function checkWinner() {
 
   if (answer === true ){
     message = `Player ${winner} Won!`
+    setMessage(message);
   };
 
-  //setMessage(message);
+
   return answer;
 }//end checkWinner
 
@@ -127,7 +128,6 @@ function doTurn(square) {
 
   if ( checkWinner() === true ) { // check to see if there is a winner
     turn = 0;
-    setMessage(`Player ${winner} Won!`);
     resetBoard();
   };
 
