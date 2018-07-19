@@ -55,8 +55,8 @@ function attachListeners(){
         var game = data;
         gameId = game.data.id;
         gameSaved = true;
-      }); 
-    };**/
+      }); **/
+    };
     
     if (gameSaved === true) {
       $.ajax({
