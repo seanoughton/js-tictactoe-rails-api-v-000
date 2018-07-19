@@ -30,19 +30,15 @@ function attachListeners(){
   });
 
   $("#previous").click(function() {
-    $("games").empty();
+    $("#games").empty(); // clear the div so that only new games are loaded
     $.get("/games", function(response) {
-//does not re-add saved games already present in the div#games element when the "previous" button is clicked a second time
-//check the buttons in the games div to see if the games are already there, and if so just add the new games
-// so you need a funciton to check if the game id exists in the games div already before you add it to the the games string
-// or clear the div and add all the games 
         var games_string = ``;
         var games_array = response.data;
         $.each(games_array, function(i, item) {
             games_string += `<button id="${item.id}">${item.id}</button>`;
         });
         $("#games").append(games_string);
-        
+
 
     });
   });
