@@ -63,10 +63,10 @@ function attachListeners(){
       });
     }
 
-  });// end save /update 
+  });// end save /update
 
   $("#clear").click(function() {
-    // clears board if game is unsaved 
+    // clears board if game is unsaved
     if (gameSaved === false) {
       resetBoard();
     }
