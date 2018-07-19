@@ -55,7 +55,7 @@ function fullBoard(board_array){
    board_full = true;
    message = "Tie game.";
  }
- setMessage(message);
+ //setMessage(message);
  return board_full;
 }
 
@@ -99,7 +99,6 @@ function resetBoard(){
   squares.forEach(function(element){
     element.innerHTML = ' '; //has to match checkforEmpty innerText
   });
-  turn = 0;
 }
 
 //Returns the token of the player whose turn it is, 'X' when the turn variable is even and 'O' when it is odd.
@@ -132,6 +131,7 @@ function doTurn(square) {
 
   var board_array = getBoard();
   if (fullBoard(board_array) === true) { // check to see if the board is full
+    setMessage("Tie game.");
     resetBoard();
   };
 
