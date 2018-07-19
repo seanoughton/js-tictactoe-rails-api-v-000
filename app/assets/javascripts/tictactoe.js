@@ -136,6 +136,7 @@ function doTurn(square) {
 
   if (fullBoard(board_array) === true) {
     resetBoard();
+    turn = 0;
   };
 
   console.log(turn);
