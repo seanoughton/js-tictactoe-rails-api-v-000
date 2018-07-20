@@ -90,13 +90,13 @@ function attachListeners(){
         });
 
         // set the turn count, go through the board and count the number of empty squares
-        emptyCount = 0;
+        boardCount = 0;
         $.each(savedBoard, function( index, value ){
-          if (value === ''){
-            emptyCount += 1;
+          if (value === 'X' || value === 'Y'){
+            boardCount += 1;
           }
         });
-        turn = emptyCount;
+        turn = boardCount+1;
       });
   });
 
