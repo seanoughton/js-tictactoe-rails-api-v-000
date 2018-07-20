@@ -73,11 +73,11 @@ function attachListeners(){
   /// has to be able to grab the buttons that were added after the DOM was loaded
   $(document).on('click', '#games :button', function(){
       $.get(`/games/${this.id}`, function(response) {
-        var savedBoard = response.data.attributes.state;
-        var squares = $('td').get()
+        var savedBoard = response.data.attributes.state; //get the saved board array
+        var squares = $('td').get() // current board
         $.each(squares, function( index, value ) {
           savedValue = savedBoard[index];
-          value.innerHTML= savedValue;
+          value.innerHTML= savedBoard[index];
         });
 
         boardCount = 0;
