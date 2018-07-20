@@ -54,13 +54,7 @@ function attachListeners(){
 
   /// Clears the game board if clear button is clicked
   $("#clear").click(function() {
-    if (gameSaved === true) {
-      resetBoard();
-      gameSaved = false;
-    };
-    if (gameSaved === false) {
-      resetBoard();
-    };
+    gameSaved ? (resetBoard(), gameSaved = false): resetBoard(); // If the game has been saved, clear the board and reset the gameSaved state to false, if the game has not been saved, just reset the board
   });
 
 /// loads the previous games if the saved games buttons are clicked
