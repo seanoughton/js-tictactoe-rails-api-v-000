@@ -97,6 +97,7 @@ function attachListeners(){
           }
         });
         turn = boardCount+1;
+        gameSaved = true;
       });
   });
 
