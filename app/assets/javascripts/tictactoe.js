@@ -4,13 +4,13 @@ $( document ).ready(function() {
 });//end document.ready
 
 /// SET Variables
-var turn = 0;
 let boardFull = false;
 let message = "";
 let winner = "";
 let gameSaved = false;
 let gameId = 0;
 let squares = $('td').get()
+var turn = 0;
 
 const WIN_COMBINATIONS = [
   [0,1,2],
@@ -193,6 +193,7 @@ function isEven(num) {
 
 function player() {
   let player = "O";
+  debugger;
   if ( isEven(turn) ) { //if the turn is an even number, player is X
     player = "X"
   };
