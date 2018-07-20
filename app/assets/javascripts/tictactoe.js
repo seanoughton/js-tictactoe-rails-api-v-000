@@ -126,11 +126,8 @@ function getBoard(){
 }
 
 function fullBoard(boardArray){
-  if ( boardArray.includes('') || boardArray.includes(' ')) {
-   boardFull = false;
- } else {
-   boardFull = true;
- }
+  //if the board has any empty squares then it is not full
+  ( boardArray.includes('') || boardArray.includes(' ') ) ? boardFull = false:boardFull = true
  return boardFull;
 }
 
@@ -142,6 +139,7 @@ function resetBoard(){
 }
 
 function checkCombinations(answer,testArray){
+
   WIN_COMBINATIONS.forEach(function(combo){ //returns array of winning combinations, ex. [0,1,2]
     combo.forEach(function(index){
       testArray.push(getBoard()[index]) //push in the value at that index either "X","Y", or ""
