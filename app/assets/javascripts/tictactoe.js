@@ -154,19 +154,19 @@ function resetBoard(){
   turn = 0;
 }
 
-function checkCombinations(answer,test_array){
+function checkCombinations(answer,testArray){
   WIN_COMBINATIONS.forEach(function(combo){ //returns array of winning combinations, ex. [0,1,2]
     combo.forEach(function(index){
-      test_array.push(getBoard()[index]) //push in the value at that index either "X","Y", or ""
+      testArray.push(getBoard()[index]) //push in the value at that index either "X","Y", or ""
     });
-    if (test_array.every(checkForX)) {
+    if (testArray.every(checkForX)) {
      answer = true;
      winner = "X"
-   } else if (test_array.every(checkForO)) {
+   } else if (testArray.every(checkForO)) {
       answer = true;
       winner = "O"
     };
-    test_array = [];
+    testArray = [];
   });
   return answer;
 };
