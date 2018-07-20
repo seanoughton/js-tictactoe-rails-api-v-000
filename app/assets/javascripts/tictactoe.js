@@ -62,12 +62,10 @@ function attachListeners(){
   $("#clear").click(function() {
     if (gameSaved === true) {
       resetBoard();
-      turn = 0;
       gameSaved = false;
     };
     if (gameSaved === false) {
       resetBoard();
-      turn = 0;
     };
   });
 
@@ -149,6 +147,7 @@ function resetBoard(){
   squares.forEach(function(element){
     element.innerHTML = '';
   });
+  turn = 0;
 }
 
 
@@ -203,7 +202,6 @@ function doTurn(square) {
   turn += 1;
 
   if ( checkWinner() === true ) { // check to see if there is a winner
-    turn = 0;
     saveGame({"state": getBoard()});
     resetBoard();
   };
@@ -212,7 +210,6 @@ function doTurn(square) {
     setMessage('Tie game.');
     saveGame({"state": getBoard()});
     resetBoard();
-    turn = 0;
   };
 
 
