@@ -48,18 +48,12 @@ function attachListeners(){
 
 /// Click function that saves or updates the game
   $("#save").click(function() {
-    var value = {"state": getBoard()};
     if (gameSaved === false) {
-      saveGame(value);
+      saveGame();
     };
 
     if (gameSaved === true) { //update the game if it was previously saved
-      updateGame(value);
-      //$.ajax({
-        //url: `/games/${gameId}`,
-        //type: 'PATCH',
-        //data: value
-      //});
+      updateGame();
     }
 
   });// end save /update
@@ -104,19 +98,19 @@ function attachListeners(){
 
 ///// HELPER METHODS
 
-function saveGame(value) { /// Saves the game to the database
-  $.post('/games', value).done(function(data) {
+function saveGame() { /// Saves the game to the database
+  $.post('/games', {"state": getBoard()}).done(function(data) {
     var game = data;
     gameId = game.data.id;
     gameSaved = true;
   });
 };
 
-function updateGame(value){
+function updateGame(){
   $.ajax({
     url: `/games/${gameId}`,
     type: 'PATCH',
-    data: value
+    data: {"state": getBoard()}
   });
 }
 
@@ -147,14 +141,13 @@ function fullBoard(board_array){
 
 function getBoard(){
   var board = $("td").get();
-  //const board_array = board.map(square => square.innerHTML);
   return board.map(square => square.innerHTML); //returns an array of board values, the "X"'s and "O"'s
 }
 
 function resetBoard(){
   var squares = $('td').get()
   squares.forEach(function(element){
-    element.innerHTML = ''; //has to match checkforEmpty innerText
+    element.innerHTML = '';
   });
 }
 
@@ -207,18 +200,17 @@ function updateState(square) {
 
 function doTurn(square) {
   updateState(square); // add X or O to the board
-  turn += 1; // increment the turn count
-  var value = {"state": getBoard()};
+  turn += 1;
 
   if ( checkWinner() === true ) { // check to see if there is a winner
     turn = 0;
-    saveGame(value);
+    saveGame({"state": getBoard()});
     resetBoard();
   };
 
   if ( (fullBoard( getBoard() )) === true && (checkWinner() === false)) { // check to see if the board is full
     setMessage('Tie game.');
-    saveGame(value);
+    saveGame({"state": getBoard()});
     resetBoard();
     turn = 0;
   };
