@@ -10,6 +10,7 @@ var message = "";
 var winner = "";
 var gameSaved = false;
 var gameId = 0;
+var squares = $('td').get()
 
 const WIN_COMBINATIONS = [
   [0,1,2],
@@ -74,10 +75,6 @@ function attachListeners(){
   $(document).on('click', '#games :button', function(){
       $.get(`/games/${this.id}`, function(response) {
         var savedBoard = response.data.attributes.state; //get the saved board array
-        //var squares = $('td').get() // current board
-        //$.each(squares, function( index, value ) {// adds the saved boards values to the current board
-          //value.innerHTML= savedBoard[index];
-        //});
         fillSquares(savedBoard);
         turnCount(savedBoard);
         gameSaved = true;
@@ -90,7 +87,6 @@ function attachListeners(){
 ///// HELPER METHODS
 
 function fillSquares(savedBoard){
-  var squares = $('td').get() // current board
   $.each(squares, function( index, value ) {// adds the saved boards values to the current board
     value.innerHTML= savedBoard[index];
   });
@@ -137,23 +133,21 @@ function checkforEmpty(element){
   return (element === ' ')//trim()
 }
 
-function fullBoard(board_array){
-  if ( board_array.includes('') || board_array.includes(' ')) {
-   board_full = false;
- } else {
-   board_full = true;
-   message = "Tie game.";
- }
- return board_full;
-}
-
 function getBoard(){
   var board = $("td").get();
   return board.map(square => square.innerHTML); //returns an array of board values, the "X"'s and "O"'s
 }
 
+function fullBoard(board_array){
+  if ( board_array.includes('') || board_array.includes(' ')) {
+   board_full = false;
+ } else {
+   board_full = true;
+ }
+ return board_full;
+}
+
 function resetBoard(){
-  var squares = $('td').get()
   squares.forEach(function(element){
     element.innerHTML = '';
   });
