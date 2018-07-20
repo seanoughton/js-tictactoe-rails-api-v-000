@@ -29,7 +29,7 @@ const WIN_COMBINATIONS = [
 function attachListeners(){
   //// Adds click listener to call doTurn if square is clicked
   $( "td" ).click(function() {
-    if ((this.innerHTML.trim() == '') && checkWinner() === false) {
+    if ((this.innerHTML.trim() === '') && checkWinner() === false) {
       doTurn(this);
     };
   });
@@ -113,7 +113,7 @@ function turnCount(savedBoard){
   let turnCount = 0;
   $.each(savedBoard, function( index, value ){
     if (value === 'X' || value === 'Y'){
-      turnCount += 1;
+      turnCount ++;
     }
   });
   turn = turnCount+1;
