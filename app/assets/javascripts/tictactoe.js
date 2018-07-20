@@ -174,9 +174,9 @@ function checkCombinations(answer,testArray){
 
 function checkWinner() {
   var answer = false;
-  var test_array = [];
+  var testArray = [];
   message = "";
-  answer = checkCombinations(answer,test_array);
+  answer = checkCombinations(answer,testArray);
 
   if (answer === true ){
     message = `Player ${winner} Won!`
