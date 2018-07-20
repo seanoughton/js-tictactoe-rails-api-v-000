@@ -74,19 +74,12 @@ function attachListeners(){
   $(document).on('click', '#games :button', function(){
       $.get(`/games/${this.id}`, function(response) {
         var savedBoard = response.data.attributes.state; //get the saved board array
-        var squares = $('td').get() // current board
-        $.each(squares, function( index, value ) {
-          savedValue = savedBoard[index];
-          value.innerHTML= savedBoard[index];
-        });
-
-        boardCount = 0;
-        $.each(savedBoard, function( index, value ){
-          if (value === 'X' || value === 'Y'){
-            boardCount += 1;
-          }
-        });
-        turn = boardCount+1;
+        //var squares = $('td').get() // current board
+        //$.each(squares, function( index, value ) {// adds the saved boards values to the current board
+          //value.innerHTML= savedBoard[index];
+        //});
+        fillSquares(savedBoard);
+        turnCount(savedBoard);
         gameSaved = true;
       });
   });
@@ -95,6 +88,13 @@ function attachListeners(){
 /////////////////////// end listeners
 
 ///// HELPER METHODS
+
+function fillSquares(savedBoard){
+  var squares = $('td').get() // current board
+  $.each(squares, function( index, value ) {// adds the saved boards values to the current board
+    value.innerHTML= savedBoard[index];
+  });
+};
 
 function saveGame() { /// Saves the game to the database
   $.post('/games', {"state": getBoard()}).done(function(data) {
@@ -111,6 +111,16 @@ function updateGame(){
     data: {"state": getBoard()}
   });
 }
+
+function turnCount(savedBoard){
+  var turnCount = 0;
+  $.each(savedBoard, function( index, value ){
+    if (value === 'X' || value === 'Y'){
+      turnCount += 1;
+    }
+  });
+  turn = turnCount+1;
+};
 
 function setMessage(string) {
   $( "#message" ).html(string);
