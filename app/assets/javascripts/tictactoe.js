@@ -83,17 +83,20 @@ function attachListeners(){
   $(document).on('click', '#games :button', function(){
       $.get(`/games/${this.id}`, function(response) {
         var savedBoard = response.data.attributes.state;
-        //load this into the board
-        //iterate through the square and put the board elements into each square
-
-
-
         var squares = $('td').get()
-
         $.each(squares, function( index, value ) {
           savedValue = savedBoard[index];
           value.innerHTML= savedValue;
         });
+
+        // set the turn count, go through the board and count the number of empty squares
+        emptyCount = 0;
+        $.each(savedBoard, function( index, value ){
+          if (value = ''){
+            emptyCount += 1;
+          }
+        })
+        console.log(emptyCount);
 
       });
   });
