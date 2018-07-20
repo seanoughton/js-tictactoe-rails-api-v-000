@@ -138,8 +138,8 @@ function getBoard(){
   return squares.map(square => square.innerHTML); //returns an array of board values, the "X"'s and "O"'s
 }
 
-function fullBoard(board_array){
-  if ( board_array.includes('') || board_array.includes(' ')) {
+function fullBoard(boardArray){
+  if ( boardArray.includes('') || boardArray.includes(' ')) {
    boardFull = false;
  } else {
    boardFull = true;
