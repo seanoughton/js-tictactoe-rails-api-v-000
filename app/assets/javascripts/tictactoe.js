@@ -5,12 +5,12 @@ $( document ).ready(function() {
 
 /// SET Variables
 var turn = 0;
-var boardFull = false;
-var message = "";
-var winner = "";
-var gameSaved = false;
-var gameId = 0;
-var squares = $('td').get()
+let boardFull = false;
+let message = "";
+let winner = "";
+let gameSaved = false;
+let gameId = 0;
+let squares = $('td').get()
 
 const WIN_COMBINATIONS = [
   [0,1,2],
@@ -110,7 +110,7 @@ function updateGame(){
 }
 
 function turnCount(savedBoard){
-  var turnCount = 0;
+  let turnCount = 0;
   $.each(savedBoard, function( index, value ){
     if (value === 'X' || value === 'Y'){
       turnCount += 1;
@@ -192,7 +192,7 @@ function isEven(num) {
 }
 
 function player() {
-  var player = "O";
+  let player = "O";
   if ( isEven(turn) ) { //if the turn is an even number, player is X
     player = "X"
   };
@@ -200,7 +200,7 @@ function player() {
 };
 
 function updateState(square) {
-  var token = player();
+  let token = player();
   square.innerHTML = token;
 }
 
