@@ -5,7 +5,7 @@ $( document ).ready(function() {
 
 /// SET Variables
 var turn = 0;
-var board_full = false;
+var boardFull = false;
 var message = "";
 var winner = "";
 var gameSaved = false;
@@ -92,6 +92,7 @@ function fillSquares(savedBoard){
   });
 };
 
+/// check how serializer works for this
 function saveGame() { /// Saves the game to the database
   $.post('/games', {"state": getBoard()}).done(function(data) {
     var game = data;
@@ -134,17 +135,16 @@ function checkforEmpty(element){
 }
 
 function getBoard(){
-  var board = $("td").get();
-  return board.map(square => square.innerHTML); //returns an array of board values, the "X"'s and "O"'s
+  return squares.map(square => square.innerHTML); //returns an array of board values, the "X"'s and "O"'s
 }
 
 function fullBoard(board_array){
   if ( board_array.includes('') || board_array.includes(' ')) {
-   board_full = false;
+   boardFull = false;
  } else {
-   board_full = true;
+   boardFull = true;
  }
- return board_full;
+ return boardFull;
 }
 
 function resetBoard(){
@@ -154,16 +154,10 @@ function resetBoard(){
   turn = 0;
 }
 
-
-function checkWinner() {
-  var answer = false;
-  var test_array = [];
-  var board_array = getBoard();
-  message = "";
-
+function checkCombinations(answer,test_array){
   WIN_COMBINATIONS.forEach(function(combo){ //returns array of winning combinations, ex. [0,1,2]
     combo.forEach(function(index){
-      test_array.push(board_array[index]) //push in the value at that index either "X","Y", or ""
+      test_array.push(getBoard()[index]) //push in the value at that index either "X","Y", or ""
     });
     if (test_array.every(checkForX)) {
      answer = true;
@@ -174,6 +168,15 @@ function checkWinner() {
     };
     test_array = [];
   });
+  return answer;
+};
+
+
+function checkWinner() {
+  var answer = false;
+  var test_array = [];
+  message = "";
+  answer = checkCombinations(answer,test_array);
 
   if (answer === true ){
     message = `Player ${winner} Won!`
