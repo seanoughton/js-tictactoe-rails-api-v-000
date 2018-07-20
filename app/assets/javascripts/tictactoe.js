@@ -21,17 +21,19 @@ const WIN_COMBINATIONS = [
   [0,4,8],
   [6,4,2]
 ];
-
+////// End set variables
 
 ////////////////////////////////////////////////////////////////
 
 function attachListeners(){
+  //// Adds click listener to call doTurn if square is clicked
   $( "td" ).click(function() {
     if ((this.innerHTML.trim() == '') && checkWinner() === false) {
       doTurn(this);
     };
   });
 
+  //// Click function to previous button that loads all the previous games as buttons into the DOM
   $("#previous").click(function() {
     $("#games").empty(); // clear the div so that only new games are loaded
     $.get("/games", function(response) {
@@ -44,30 +46,25 @@ function attachListeners(){
     });
   });
 
+/// Click function that saves or updates the game
   $("#save").click(function() {
-    //{state: ["X", "O", "X", "", "O", "O", "", "", "X"]}
-
     var value = {"state": getBoard()};
     if (gameSaved === false) {
       saveGame(value);
-
-      //$.post('/games', value).done(function(data) {
-        //var game = data;
-        //gameId = game.data.id;
-        //gameSaved = true;
-      //});
     };
 
-    if (gameSaved === true) {
-      $.ajax({
-        url: `/games/${gameId}`,
-        type: 'PATCH',
-        data: value
-      });
+    if (gameSaved === true) { //update the game if it was previously saved
+      updateGame(value);
+      //$.ajax({
+        //url: `/games/${gameId}`,
+        //type: 'PATCH',
+        //data: value
+      //});
     }
 
   });// end save /update
 
+  /// Clears the game board if clear button is clicked
   $("#clear").click(function() {
     if (gameSaved === true) {
       resetBoard();
@@ -80,6 +77,8 @@ function attachListeners(){
     };
   });
 
+/// loads the previous games if the saved games buttons are clicked
+  /// has to be able to grab the buttons that were added after the DOM was loaded
   $(document).on('click', '#games :button', function(){
       $.get(`/games/${this.id}`, function(response) {
         var savedBoard = response.data.attributes.state;
@@ -89,7 +88,6 @@ function attachListeners(){
           value.innerHTML= savedValue;
         });
 
-        // set the turn count, go through the board and count the number of empty squares
         boardCount = 0;
         $.each(savedBoard, function( index, value ){
           if (value === 'X' || value === 'Y'){
@@ -106,7 +104,7 @@ function attachListeners(){
 
 ///// HELPER METHODS
 
-function saveGame(value) {
+function saveGame(value) { /// Saves the game to the database
   $.post('/games', value).done(function(data) {
     var game = data;
     gameId = game.data.id;
@@ -114,7 +112,13 @@ function saveGame(value) {
   });
 };
 
-
+function updateGame(value){
+  $.ajax({
+    url: `/games/${gameId}`,
+    type: 'PATCH',
+    data: value
+  });
+}
 
 function setMessage(string) {
   $( "#message" ).html(string);
@@ -147,10 +151,16 @@ function getBoard(){
   return board.map(square => square.innerHTML); //returns an array of board values, the "X"'s and "O"'s
 }
 
+function resetBoard(){
+  var squares = $('td').get()
+  squares.forEach(function(element){
+    element.innerHTML = ''; //has to match checkforEmpty innerText
+  });
+}
 
 
 function checkWinner() {
-  var answer = false; //this will be the return value True = there is a winner, False = no winner
+  var answer = false;
   var test_array = [];
   var board_array = getBoard();
   message = "";
@@ -174,21 +184,12 @@ function checkWinner() {
     setMessage(message);
   };
 
-
   return answer;
 }//end checkWinner
 
-function resetBoard(){
-  var squares = $('td').get()
-  squares.forEach(function(element){
-    element.innerHTML = ''; //has to match checkforEmpty innerText
-  });
-}
-
-//Returns the token of the player whose turn it is, 'X' when the turn variable is even and 'O' when it is odd.
 
 function isEven(num) {
-    return num % 2 === 0;
+  return num % 2 === 0;
 }
 
 function player() {
@@ -199,7 +200,6 @@ function player() {
   return player;
 };
 
-//Invokes player() and adds the returned string ('X' or 'O') to the clicked square on the game board.
 function updateState(square) {
   var token = player();
   square.innerHTML = token;
@@ -216,15 +216,12 @@ function doTurn(square) {
     resetBoard();
   };
 
-  var board_array = getBoard();
-  if ( (fullBoard(board_array)) === true && (checkWinner() === false)) { // check to see if the board is full
+  if ( (fullBoard( getBoard() )) === true && (checkWinner() === false)) { // check to see if the board is full
     setMessage('Tie game.');
     saveGame(value);
     resetBoard();
     turn = 0;
   };
-
-
 
 
 
