@@ -4,12 +4,11 @@ $( document ).ready(function() {
 });//end document.ready
 
 /// SET Variables
-var boardFull = false;
-var message = "";
-var winner = "";
-var gameSaved = false;
-var gameId = 0;
-//var squares = $('td').get();
+let boardFull = false;
+let message = "";
+let winner = "";
+let gameSaved = false;
+let gameId = 0;
 var turn = 0;
 
 const WIN_COMBINATIONS = [
