@@ -4,12 +4,12 @@ $( document ).ready(function() {
 });//end document.ready
 
 /// SET Variables
-let boardFull = false;
-let message = "";
-let winner = "";
-let gameSaved = false;
-let gameId = 0;
-let squares = $('td').get()
+var boardFull = false;
+var message = "";
+var winner = "";
+var gameSaved = false;
+var gameId = 0;
+var squares = $('td').get();
 var turn = 0;
 
 const WIN_COMBINATIONS = [
@@ -38,8 +38,8 @@ function attachListeners(){
   $("#previous").click(function() {
     $("#games").empty(); // clear the div so that only new games are loaded
     $.get("/games", function(response) {
-        let gamesString = ``;
-        let gamesArray = response.data;
+        var gamesString = ``;
+        var gamesArray = response.data;
         $.each(gamesArray, function(i, item) {
             gamesString += `<button id="${item.id}">${item.id}</button>`;
         });
@@ -62,7 +62,7 @@ function attachListeners(){
   /// has to be able to grab the buttons that were added after the DOM was loaded
   $(document).on('click', '#games :button', function(){
       $.get(`/games/${this.id}`, function(response) {
-        let savedBoard = response.data.attributes.state; //get the saved board array
+        var savedBoard = response.data.attributes.state; //get the saved board array
         fillSquares(savedBoard);
         turnCount(savedBoard);
         gameSaved = true;
@@ -74,8 +74,8 @@ function attachListeners(){
 
 ///// HELPER METHODS
 
-function fillSquares(savedBoard){
-  $.each(squares, function( index, value ) {// adds the saved boards values to the current board
+function fillSquares(savedBoard){// adds the saved boards values to the current board
+  $.each(squares, function( index, value ) {
     value.innerHTML= savedBoard[index];
   });
 };
@@ -83,7 +83,7 @@ function fillSquares(savedBoard){
 /// check how serializer works for this
 function saveGame() { /// Saves the game to the database
   $.post('/games', {"state": getBoard()}).done(function(data) {
-    let game = data;
+    var game = data;
     gameId = game.data.id;
     gameSaved = true;
   });
@@ -98,9 +98,9 @@ function updateGame(){
 }
 
 function turnCount(savedBoard){
-  let turnCount = 0;
+  var turnCount = 0;
   $.each(savedBoard, function( index, value ){
-    if (value === 'X' || value === 'Y'){
+    if (value === 'X' || value === 'O'){
       turnCount ++;
     }
   });
@@ -123,12 +123,19 @@ function checkforEmpty(element){
 }
 
 function getBoard(){
-  return squares.map(square => square.innerHTML); //returns an array of board values, the "X"'s and "O"'s
+  var board = $("td").get();
+  return board.map(square => square.innerHTML);
 }
 
-function fullBoard(boardArray){
+function fullBoard(){
   //if the board has any empty squares then it is not full
-  ( boardArray.includes('') || boardArray.includes(' ') ) ? boardFull = false:boardFull = true
+  //( boardArray.includes('') || boardArray.includes(' ') ) ? boardFull = false:boardFull = true
+  var boardArray = getBoard();
+  if (boardArray.includes('') || boardArray.includes(' ') ){
+    boardFull = false;
+  } else {
+    boardFull = true;
+  }
  return boardFull;
 }
 
@@ -139,30 +146,28 @@ function resetBoard(){
   turn = 0;
 }
 
-function checkCombinations(answer,testArray){
-
-  WIN_COMBINATIONS.forEach(function(combo){ //returns array of winning combinations, ex. [0,1,2]
-    combo.forEach(function(index){
-      testArray.push(getBoard()[index]) //push in the value at that index either "X","Y", or ""
-    });
-    if (testArray.every(checkForX)) {
-     answer = true;
-     winner = "X"
-   } else if (testArray.every(checkForO)) {
-      answer = true;
-      winner = "O"
-    };
-    testArray = [];
-  });
-  return answer;
-};
 
 
 function checkWinner() {
   var answer = false;
   var testArray = [];
   message = "";
-  answer = checkCombinations(answer,testArray);
+  //answer = checkCombinations();
+
+  WIN_COMBINATIONS.forEach(function(combo){ //returns array of winning combinations, ex. [0,1,2]
+    combo.forEach(function(index){
+      testArray.push(getBoard()[index]) //push in the value at that index either "X","Y", or ""
+    });
+    if (testArray.every(checkForX) === true) {
+     answer = true;
+     winner = "X"
+   } else if (testArray.every(checkForO) === true) {
+      answer = true;
+      winner = "O"
+    };
+    testArray = [];
+  });
+
 
   if (answer === true ){
     message = `Player ${winner} Won!`
@@ -178,8 +183,7 @@ function isEven(num) {
 }
 
 function player() {
-  let player = "O";
-  debugger;
+  var player = "O";
   if ( isEven(turn) ) { //if the turn is an even number, player is X
     player = "X"
   };
@@ -187,7 +191,7 @@ function player() {
 };
 
 function updateState(square) {
-  let token = player();
+  var token = player();
   square.innerHTML = token;
 }
 
@@ -200,7 +204,7 @@ function doTurn(square) {
     resetBoard();
   };
 
-  if ( (fullBoard( getBoard() )) === true && (checkWinner() === false)) { // check to see if the board is full
+  if ( (fullBoard() === true) && (checkWinner() === false)) { // check to see if the board is full
     setMessage('Tie game.');
     saveGame({"state": getBoard()});
     resetBoard();
