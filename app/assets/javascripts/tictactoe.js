@@ -60,7 +60,7 @@ function attachListeners(){
   /// has to be able to grab the buttons that were added after the DOM was loaded
   $(document).on('click', '#games :button', function(){
       $.get(`/games/${this.id}`, function(response) {
-        var savedBoard = response.data.attributes.state; //get the saved board array
+        let savedBoard = response.data.attributes.state; //get the saved board array
         fillSquares(savedBoard);
         turnCount(savedBoard);
         gameSaved = true;
@@ -75,8 +75,8 @@ function attachListeners(){
 function loadPreviousGames(){
   $("#games").empty(); // clear the div so that only new games are loaded
   $.get("/games", function(response) {
-      var gamesString = ``;
-      var gamesArray = response.data;
+      let gamesString = ``;
+      let gamesArray = response.data;
       $.each(gamesArray, function(i, item) {
           gamesString += `<button id="${item.id}">${item.id}</button>`;
       });
@@ -108,6 +108,10 @@ function saveGame() { /// Saves the game to the database
     gameId = game.data.id;
     gameSaved = true;
   });
+
+  if ($("#games").html().length > 0) {
+    loadPreviousGames();
+  }
 };
 
 function updateGame(){
@@ -216,9 +220,7 @@ function doTurn(square) {
   if ( checkWinner() === true ) { // check to see if there is a winner
     saveGame({"state": getBoard()});
     resetBoard();
-    if ($("#games").html().length > 0) {
-      loadPreviousGames();
-    }
+
 
   };
 
