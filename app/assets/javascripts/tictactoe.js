@@ -9,7 +9,7 @@ var message = "";
 var winner = "";
 var gameSaved = false;
 var gameId = 0;
-var squares = $('td').get();
+//var squares = $('td').get();
 var turn = 0;
 
 const WIN_COMBINATIONS = [
@@ -36,15 +36,7 @@ function attachListeners(){
 
   //// Click function to previous button that loads all the previous games as buttons into the DOM
   $("#previous").click(function() {
-    $("#games").empty(); // clear the div so that only new games are loaded
-    $.get("/games", function(response) {
-        var gamesString = ``;
-        var gamesArray = response.data;
-        $.each(gamesArray, function(i, item) {
-            gamesString += `<button id="${item.id}">${item.id}</button>`;
-        });
-        $("#games").append(gamesString);
-    });
+    loadPreviousGames();
   });
 
 /// Click function that saves or updates the game
@@ -80,6 +72,18 @@ function attachListeners(){
 /////////////////////// end listeners
 
 ///// HELPER METHODS
+
+function loadPreviousGames(){
+  $("#games").empty(); // clear the div so that only new games are loaded
+  $.get("/games", function(response) {
+      var gamesString = ``;
+      var gamesArray = response.data;
+      $.each(gamesArray, function(i, item) {
+          gamesString += `<button id="${item.id}">${item.id}</button>`;
+      });
+      $("#games").append(gamesString);
+    });
+}
 
 function fillSquares(savedBoard){// adds the saved boards values to the current board
   let boardArray = $('td').get();
