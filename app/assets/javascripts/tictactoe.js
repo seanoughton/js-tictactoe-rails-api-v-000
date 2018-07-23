@@ -177,11 +177,11 @@ function checkCombinations(){
 function checkWinner() {
   let winner = false;
   message = "";
-  answer = checkCombinations();
+  winner = checkCombinations();
 
 
 
-  if (answer === true ){
+  if (winner === true ){
     message = `Player ${winner} Won!`
     setMessage(message);
   };
