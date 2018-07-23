@@ -153,7 +153,9 @@ function resetBoard(){
   turn = 0;
 }
 
-
+function checkCombinations(){
+  
+}
 
 function checkWinner() {
   let answer = false;
