@@ -94,7 +94,7 @@ function turnCount(savedBoard){
   turn = turnCount;
 };
 
-/// check how serializer works for this
+
 function saveGame() { /// Saves the game to the database
   $.post('/games', {"state": getBoard()}).done(function(data) {
     let game = data;
@@ -115,7 +115,9 @@ function updateGame(){
   });
 }
 
-
+function getSquares(){
+  return $("td").get();
+}
 
 function setMessage(string) {
   $( "#message" ).html(string);
@@ -132,20 +134,19 @@ function checkforEmpty(element){
   return (element === ' ')//trim()
 }
 
-function getBoard(){
-  let board = $("td").get();
+function getBoard(){ //returns an array of the values of the squares in the board
+  let board = getSquares();
   return board.map(square => square.innerHTML);
 }
 
-function fullBoard(){
-  //if the board has any empty squares then it is not full
+function fullBoard(){  //if the board has any empty squares then it is not full
   let boardArray = getBoard();
   ( boardArray.includes('') || boardArray.includes(' ') ) ? boardFull = false:boardFull = true
  return boardFull;
 }
 
 function resetBoard(){
-  let boardArray = $('td').get();
+  let boardArray = getSquares();
   boardArray.forEach(function(element){
     element.innerHTML = '';
   });
