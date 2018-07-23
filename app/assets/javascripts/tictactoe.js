@@ -175,7 +175,7 @@ function checkCombinations(){
 }
 
 function checkWinner() {
-
+  let winner = false;
   message = "";
   answer = checkCombinations();
 
