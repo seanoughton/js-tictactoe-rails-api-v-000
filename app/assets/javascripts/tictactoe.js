@@ -55,7 +55,14 @@ function attachListeners(){
 
   /// Clears the game board if clear button is clicked
   $("#clear").click(function() {
-    gameSaved ? (resetBoard(), gameSaved = false): resetBoard(); // If the game has been saved, clear the board and reset the gameSaved state to false, if the game has not been saved, just reset the board
+    //gameSaved ? (resetBoard(), gameSaved = false): resetBoard(); // If the game has been saved, clear the board and reset the gameSaved state to false, if the game has not been saved, just reset the board
+    if (gameSaved === true) {
+      resetBoard();
+      gameSaved = false;
+    } else {
+      resetBoard();
+    }
+
   });
 
 /// loads the previous games if the saved games buttons are clicked
@@ -143,7 +150,8 @@ function fullBoard(){
 }
 
 function resetBoard(){
-  squares.forEach(function(element){
+  let boardArray = $('td').get();
+  boardArray.forEach(function(element){
     element.innerHTML = '';
   });
   turn = 0;
