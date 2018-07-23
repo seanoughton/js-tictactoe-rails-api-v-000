@@ -157,13 +157,6 @@ function checkCombinations(){
   let answer = false;
   let testArray = [];
 
-}
-
-function checkWinner() {
-
-  message = "";
-  //answer = checkCombinations();
-
   WIN_COMBINATIONS.forEach(function(combo){ //returns array of winning combinations, ex. [0,1,2]
     combo.forEach(function(index){
       testArray.push(getBoard()[index]) //push in the value at that index either "X","Y", or ""
@@ -177,6 +170,15 @@ function checkWinner() {
     };
     testArray = [];
   });
+
+
+}
+
+function checkWinner() {
+
+  message = "";
+  //answer = checkCombinations();
+
 
 
   if (answer === true ){
