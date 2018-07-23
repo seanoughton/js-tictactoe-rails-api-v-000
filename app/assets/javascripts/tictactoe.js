@@ -92,7 +92,7 @@ function fillSquares(savedBoard){// adds the saved boards values to the current 
 };
 
 function turnCount(savedBoard){
-  var turnCount = 0;
+  let turnCount = 0;
   $.each(savedBoard, function( index, value ){
     if (value === 'X' || value === 'O'){
       turnCount ++;
@@ -104,7 +104,7 @@ function turnCount(savedBoard){
 /// check how serializer works for this
 function saveGame() { /// Saves the game to the database
   $.post('/games', {"state": getBoard()}).done(function(data) {
-    var game = data;
+    let game = data;
     gameId = game.data.id;
     gameSaved = true;
   });
@@ -140,7 +140,7 @@ function checkforEmpty(element){
 }
 
 function getBoard(){
-  var board = $("td").get();
+  let board = $("td").get();
   return board.map(square => square.innerHTML);
 }
 
@@ -167,8 +167,8 @@ function resetBoard(){
 
 
 function checkWinner() {
-  var answer = false;
-  var testArray = [];
+  let answer = false;
+  let testArray = [];
   message = "";
   //answer = checkCombinations();
 
@@ -201,7 +201,7 @@ function isEven(num) {
 }
 
 function player() {
-  var player = "O";
+  let player = "O";
   if ( isEven(turn) ) { //if the turn is an even number, player is X
     player = "X"
   };
@@ -209,7 +209,7 @@ function player() {
 };
 
 function updateState(square) {
-  var token = player();
+  let token = player();
   square.innerHTML = token;
 }
 
