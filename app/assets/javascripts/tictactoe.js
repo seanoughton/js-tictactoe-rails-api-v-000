@@ -49,8 +49,10 @@ function attachListeners(){
 
 /// Click function that saves or updates the game
   $("#save").click(function() {
+
     gameSaved ? updateGame():saveGame(); // if the game has been saved update, otherwise save the game
   });
+
 
   /// Clears the game board if clear button is clicked
   $("#clear").click(function() {
