@@ -38,8 +38,8 @@ function attachListeners(){
   $("#previous").click(function() {
     $("#games").empty(); // clear the div so that only new games are loaded
     $.get("/games", function(response) {
-        var gamesString = ``;
-        var gamesArray = response.data;
+        let gamesString = ``;
+        let gamesArray = response.data;
         $.each(gamesArray, function(i, item) {
             gamesString += `<button id="${item.id}">${item.id}</button>`;
         });
