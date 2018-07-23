@@ -217,6 +217,10 @@ function doTurn(square) {
   if ( checkWinner() === true ) { // check to see if there is a winner
     saveGame({"state": getBoard()});
     resetBoard();
+    if ($("#games").html().length > 0) {
+      loadPreviousGames();
+    }
+
   };
 
   if ( (fullBoard() === true) && (checkWinner() === false)) { // check to see if the board is full
