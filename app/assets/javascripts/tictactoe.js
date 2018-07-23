@@ -153,9 +153,13 @@ function resetBoard(){
   turn = 0;
 }
 
-function checkCombinations(){
+
+
+function checkWinner() {
   let answer = false;
   let testArray = [];
+  message = "";
+  //answer = checkCombinations();
 
   WIN_COMBINATIONS.forEach(function(combo){ //returns array of winning combinations, ex. [0,1,2]
     combo.forEach(function(index){
@@ -171,17 +175,8 @@ function checkCombinations(){
     testArray = [];
   });
 
-  return answer
-}
 
-function checkWinner() {
-  let winner = false;
-  message = "";
-  winner = checkCombinations();
-
-
-
-  if (winner === true ){
+  if (answer === true ){
     message = `Player ${winner} Won!`
     setMessage(message);
   };
