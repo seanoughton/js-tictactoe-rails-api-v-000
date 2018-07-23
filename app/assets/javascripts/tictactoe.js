@@ -154,12 +154,13 @@ function resetBoard(){
 }
 
 function checkCombinations(){
-  
+  let answer = false;
+  let testArray = [];
+
 }
 
 function checkWinner() {
-  let answer = false;
-  let testArray = [];
+
   message = "";
   //answer = checkCombinations();
 
