@@ -177,7 +177,7 @@ function checkCombinations(){
 function checkWinner() {
 
   message = "";
-  answer = checkCombinations();
+  //answer = checkCombinations();
 
 
 
@@ -186,7 +186,7 @@ function checkWinner() {
     setMessage(message);
   };
 
-  return answer;
+  return checkCombinations();//answer;
 }//end checkWinner
 
 
