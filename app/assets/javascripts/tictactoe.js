@@ -46,14 +46,7 @@ function attachListeners(){
 
   /// Clears the game board if clear button is clicked
   $("#clear").click(function() {
-    //gameSaved ? (resetBoard(), gameSaved = false): resetBoard(); // If the game has been saved, clear the board and reset the gameSaved state to false, if the game has not been saved, just reset the board
-    if (gameSaved === true) {
-      resetBoard();
-      gameSaved = false;
-    } else {
-      resetBoard();
-    }
-
+    gameSaved ? (resetBoard(), gameSaved = false): resetBoard(); // If the game has been saved, clear the board and reset the gameSaved state to false, if the game has not been saved, just reset the board
   });
 
 /// loads the previous games if the saved games buttons are clicked
@@ -146,13 +139,8 @@ function getBoard(){
 
 function fullBoard(){
   //if the board has any empty squares then it is not full
-  //( boardArray.includes('') || boardArray.includes(' ') ) ? boardFull = false:boardFull = true
   let boardArray = getBoard();
-  if (boardArray.includes('') || boardArray.includes(' ') ){
-    boardFull = false;
-  } else {
-    boardFull = true;
-  }
+  ( boardArray.includes('') || boardArray.includes(' ') ) ? boardFull = false:boardFull = true
  return boardFull;
 }
 
@@ -220,8 +208,6 @@ function doTurn(square) {
   if ( checkWinner() === true ) { // check to see if there is a winner
     saveGame({"state": getBoard()});
     resetBoard();
-
-
   };
 
   if ( (fullBoard() === true) && (checkWinner() === false)) { // check to see if the board is full
