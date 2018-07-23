@@ -171,7 +171,7 @@ function checkCombinations(){
     testArray = [];
   });
 
-
+  return answer
 }
 
 function checkWinner() {
