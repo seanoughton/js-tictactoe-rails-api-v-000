@@ -75,9 +75,20 @@ function attachListeners(){
 ///// HELPER METHODS
 
 function fillSquares(savedBoard){// adds the saved boards values to the current board
-  $.each(squares, function( index, value ) {
+  let boardArray = $('td').get();
+  $.each(boardArray, function( index, value ) {
     value.innerHTML= savedBoard[index];
   });
+};
+
+function turnCount(savedBoard){
+  var turnCount = 0;
+  $.each(savedBoard, function( index, value ){
+    if (value === 'X' || value === 'O'){
+      turnCount ++;
+    }
+  });
+  turn = turnCount;
 };
 
 /// check how serializer works for this
@@ -97,15 +108,7 @@ function updateGame(){
   });
 }
 
-function turnCount(savedBoard){
-  var turnCount = 0;
-  $.each(savedBoard, function( index, value ){
-    if (value === 'X' || value === 'O'){
-      turnCount ++;
-    }
-  });
-  turn = turnCount+1;
-};
+
 
 function setMessage(string) {
   $( "#message" ).html(string);
@@ -130,7 +133,7 @@ function getBoard(){
 function fullBoard(){
   //if the board has any empty squares then it is not full
   //( boardArray.includes('') || boardArray.includes(' ') ) ? boardFull = false:boardFull = true
-  var boardArray = getBoard();
+  let boardArray = getBoard();
   if (boardArray.includes('') || boardArray.includes(' ') ){
     boardFull = false;
   } else {
