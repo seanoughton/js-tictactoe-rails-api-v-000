@@ -49,7 +49,6 @@ function attachListeners(){
 
 /// Click function that saves or updates the game
   $("#save").click(function() {
-
     gameSaved ? updateGame():saveGame(); // if the game has been saved update, otherwise save the game
   });
 
@@ -84,7 +83,7 @@ function fillSquares(savedBoard){
 /// check how serializer works for this
 function saveGame() { /// Saves the game to the database
   $.post('/games', {"state": getBoard()}).done(function(data) {
-    var game = data;
+    let game = data;
     gameId = game.data.id;
     gameSaved = true;
   });
