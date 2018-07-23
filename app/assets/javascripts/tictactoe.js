@@ -159,7 +159,6 @@ function checkWinner() {
   let answer = false;
   let testArray = [];
   message = "";
-  //answer = checkCombinations();
 
   WIN_COMBINATIONS.forEach(function(combo){ //returns array of winning combinations, ex. [0,1,2]
     combo.forEach(function(index){
