@@ -78,7 +78,7 @@ function loadPreviousGames(){
 }
 
 function fillSquares(savedBoard){// adds the saved boards values to the current board
-  let boardArray = $('td').get();
+  let boardArray = getSquares();
   $.each(boardArray, function( index, value ) {
     value.innerHTML= savedBoard[index];
   });
